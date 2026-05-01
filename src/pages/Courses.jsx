@@ -67,7 +67,7 @@ export default function Courses() {
         </motion.div>
 
         {/* Right: Big Lanyard — z-index 5, below menu (z-index ~100) */}
-        <div style={{ position: 'absolute', top: 0, right: 0, width: '55vw', height: '100vh', zIndex: 5, minWidth: '400px' }}>
+        <div style={{ position: 'absolute', top: 0, right: 0, width: '55vw', height: '100vh', zIndex: 5, minWidth: '300px' }}>
           <Lanyard position={[0, 0, 20]} gravity={[0, -25, 0]} fov={18} />
         </div>
       </div>

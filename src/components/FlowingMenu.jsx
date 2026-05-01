@@ -142,6 +142,9 @@ function MenuItem({ link, text, image, images, speed, textColor, marqueeBgColor,
         href={link}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={(e) => {
+          if (link === '#') e.preventDefault();
+        }}
         style={{ color: textColor }}
       >
         {text}

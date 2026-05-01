@@ -60,14 +60,14 @@ export default function WhyChooseUs() {
 
   const handleTerminalClick = () => {
     if (isTyping || isVideoOpen) return;
-    
+
     setIsTyping(true);
     setTypedText("");
-    
+
     const textToType = "./play_video.sh --source=./assets/Skillmerge.mp4";
     let currentText = "";
     let i = 0;
-    
+
     const typingInterval = setInterval(() => {
       if (i < textToType.length) {
         currentText += textToType.charAt(i);
@@ -104,7 +104,7 @@ export default function WhyChooseUs() {
         fillOpacity={0.35}
         className="terminal-border-glow"
       >
-        <div 
+        <div
           className="terminal-wrapper"
           ref={terminalRef}
           onMouseEnter={() => setIsHovered(true)}
@@ -112,7 +112,7 @@ export default function WhyChooseUs() {
           onClick={handleTerminalClick}
         >
           {/* Custom Watch Reel Cursor */}
-          <motion.div 
+          <motion.div
             className="watch-reel-cursor"
             style={{ x: cursorX, y: cursorY, willChange: 'transform' }}
             initial={{ scale: 0, opacity: 0 }}
@@ -172,14 +172,14 @@ export default function WhyChooseUs() {
       {/* Embedded Video Modal */}
       <AnimatePresence>
         {isVideoOpen && (
-          <motion.div 
+          <motion.div
             className="video-modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsVideoOpen(false)}
           >
-            <motion.div 
+            <motion.div
               className="video-modal-content"
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -190,16 +190,18 @@ export default function WhyChooseUs() {
               <button className="close-video-btn mono" onClick={() => setIsVideoOpen(false)}>
                 [X] CLOSE
               </button>
-              <div className="iframe-wrapper">
-                <video
+              <div className="iframe-wrapper" style={{ width: '100%', height: '100%' }}>
+                <iframe
                   key={isVideoOpen ? 'open' : 'closed'}
-                  src="/Skillmerge.mp4"
-                  controls
-                  autoPlay
-                  playsInline
-                  preload="auto"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px', background: '#000', display: 'block' }}
-                />
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/2JT53CHVRpI?autoplay=1"
+                  title="SkillMerge Academy"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ borderRadius: '8px', background: '#000', display: 'block' }}
+                ></iframe>
               </div>
             </motion.div>
           </motion.div>

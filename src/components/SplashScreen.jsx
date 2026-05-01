@@ -135,7 +135,7 @@ export default function SplashScreen({ onComplete }) {
 
       {/* Diagonal Line SVG Overlay */}
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="splash-line-svg">
-        <line x1="100" y1="0" x2="0" y2="100" stroke="#c026d3" ref={lineRef} />
+        <line x1="100" y1="0" x2="0" y2="100" stroke="#c026d3" ref={lineRef} strokeDasharray="150" strokeDashoffset="150" strokeWidth="0.5" />
       </svg>
 
       {/* Centered Logo Container */}

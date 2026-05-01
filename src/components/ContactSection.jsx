@@ -44,7 +44,7 @@ export default function ContactSection() {
         </div>
 
         {/* Right Side: Spline Model */}
-        <div style={{ flex: '1.5', minWidth: '350px', height: '600px', position: 'relative' }}>
+        <div style={{ flex: '1.5', minWidth: '280px', height: '600px', position: 'relative' }}>
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

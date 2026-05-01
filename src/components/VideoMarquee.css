@@ -170,10 +170,10 @@
 .close-video-btn:hover { color: #fff; }
 
 .modal-video {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 85vh;
+  height: 85vh;
+  aspect-ratio: 9 / 16;
+  max-width: 90vw;
+  object-fit: cover;
   border-radius: 8px;
   background: #000;
   display: block;

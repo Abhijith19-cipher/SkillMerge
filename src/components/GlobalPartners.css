@@ -120,3 +120,20 @@
   transform: scale(1.1);
   filter: drop-shadow(0 0 15px rgba(192, 38, 211, 0.4));
 }
+
+/* ─── Lite Mode: stop animation, enable native scroll ─── */
+.marquee-container.lite-mode {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(107, 33, 232, 0.4) transparent;
+}
+
+.marquee-container.lite-mode .marquee-track {
+  width: auto;
+}
+
+.marquee-container.lite-mode .marquee-content {
+  animation: none;
+  flex-wrap: nowrap;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Stack from './Stack';
 import { motion } from 'motion/react';
 import { usePerformance } from '../context/PerformanceContext';
+import './CourseReviewsSection.css';
 
 const REVIEWS = [
   {
@@ -151,16 +152,17 @@ export default function CourseReviewsSection() {
           </div>
         </motion.div>
 
-        {/* Stack + Side reviews layout */}
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '4rem',
-          alignItems: 'center',
-          justifyContent: 'center',
-          maxWidth: '1000px',
-          margin: '0 auto',
-        }}>
+        {/* ── Mobile: swipe carousel ── */}
+        <div className="reviews-mobile-swipe">
+          {REVIEWS.map((review, i) => (
+            <div key={i} className="reviews-swipe-card">
+              <ReviewCard review={review} />
+            </div>
+          ))}
+        </div>
+
+        {/* ── Desktop: Stack + scrollable list ── */}
+        <div className="reviews-desktop-layout">
           {/* Draggable Stack */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}

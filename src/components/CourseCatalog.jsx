@@ -6,7 +6,7 @@ import './CourseCatalog.css';
 
 export const courses = [
   {
-    id: '01',
+    id: 'internship',
     title: 'INTERNSHIP',
     abbr: '',
     desc: 'Real-world practical experience to jumpstart your cybersecurity career.',
@@ -15,7 +15,7 @@ export const courses = [
     img: 'https://skillmergeacademy.com/wp-content/uploads/2025/12/INTERNSHIP.avif'
   },
   {
-    id: '02',
+    id: 'adpt',
     title: 'Advanced Diploma in Purple Teaming',
     abbr: 'ADPT',
     desc: 'Master both offensive (Red) and defensive (Blue) tactics.',
@@ -24,7 +24,7 @@ export const courses = [
     img: 'https://skillmergeacademy.com/wp-content/uploads/2025/12/Advance-Diploma-in-Purple-Teaming.avif'
   },
   {
-    id: '03',
+    id: 'cca',
     title: 'Certified Cyber Security Associate',
     abbr: 'CCA',
     desc: 'Fundamental knowledge and practical skills for aspiring professionals.',
@@ -33,7 +33,7 @@ export const courses = [
     img: 'https://skillmergeacademy.com/wp-content/uploads/2025/12/Certified-CyberSecurity-Associate.avif'
   },
   {
-    id: '04',
+    id: 'ccs',
     title: 'Certified Cyber Security Specialist',
     abbr: 'CCS',
     desc: 'Deep dive into specialized cybersecurity domains and advanced threat mitigation.',
@@ -42,7 +42,7 @@ export const courses = [
     img: 'https://skillmergeacademy.com/wp-content/uploads/2025/12/Certified-CyberSecurity-Specialist.avif'
   },
   {
-    id: '05',
+    id: 'cdo',
     title: 'Certified Defensive Operator',
     abbr: 'CDO',
     desc: 'Focus on network defense, threat hunting, and incident response.',
@@ -51,7 +51,7 @@ export const courses = [
     img: 'https://skillmergeacademy.com/wp-content/uploads/2026/01/CDO.avif'
   },
   {
-    id: '06',
+    id: 'cna',
     title: 'Certified Network Associate',
     abbr: 'CNA',
     desc: 'Build a strong foundation in networking concepts and infrastructure.',
@@ -60,7 +60,7 @@ export const courses = [
     img: 'https://skillmergeacademy.com/wp-content/uploads/2025/12/Certified-Network-Associate.avif'
   },
   {
-    id: '07',
+    id: 'cns',
     title: 'Certified Network Specialist',
     abbr: 'CNS',
     desc: 'Advanced network administration, troubleshooting, and optimization.',
@@ -69,7 +69,7 @@ export const courses = [
     img: 'https://skillmergeacademy.com/wp-content/uploads/2025/12/Certified-Network-Specialist.avif'
   },
   {
-    id: '08',
+    id: 'cnse',
     title: 'Certified Network Security Engineer',
     abbr: 'CNSE',
     desc: 'Design, implement, and manage robust network security architectures.',

@@ -1,0 +1,49 @@
+/* ─── CourseReviewsSection.css ─── */
+
+/* Mobile: horizontal swipe carousel */
+.reviews-mobile-swipe {
+  display: none; /* hidden on desktop */
+}
+
+/* Desktop: Stack + list side by side */
+.reviews-desktop-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ── Mobile breakpoint (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* Hide desktop layout */
+  .reviews-desktop-layout {
+    display: none;
+  }
+
+  /* Show mobile swipe carousel */
+  .reviews-mobile-swipe {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding: 1rem 1.5rem 2rem;
+    scrollbar-width: none; /* hide scrollbar visually */
+    /* Show scroll-indicator dots below */
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .reviews-mobile-swipe::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reviews-swipe-card {
+    flex: 0 0 85vw;      /* each card = 85% viewport width */
+    max-width: 340px;
+    scroll-snap-align: center;
+  }
+}

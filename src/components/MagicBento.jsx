@@ -1,6 +1,7 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
 import './MagicBento.css';
+import { usePerformance } from '../context/PerformanceContext';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -289,9 +290,10 @@ const GlobalSpotlight = ({
 }) => {
   const spotlightRef = useRef(null);
   const isInsideSection = useRef(false);
+  const { isLiteMode } = usePerformance();
 
   useEffect(() => {
-    if (disableAnimations || !gridRef?.current || !enabled) return;
+    if (disableAnimations || isLiteMode || !gridRef?.current || !enabled) return;
 
     const spotlight = document.createElement('div');
     spotlight.className = 'global-spotlight';
@@ -449,7 +451,8 @@ const MagicBento = ({
 }) => {
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
-  const shouldDisableAnimations = disableAnimations || isMobile;
+  const { isLiteMode } = usePerformance();
+  const shouldDisableAnimations = disableAnimations || isLiteMode || isMobile;
 
   return (
     <>
@@ -590,7 +593,7 @@ const MagicBento = ({
                 el.addEventListener('mouseleave', handleMouseLeave);
               }}
               onClick={(e) => {
-                if (clickEffect && !disableAnimations) {
+                if (clickEffect && !shouldDisableAnimations) {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const x = e.clientX - rect.left;
                   const y = e.clientY - rect.top;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { usePerformance } from '../context/PerformanceContext';
 
 const ICONS = [
   { name: 'Kali Linux', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
@@ -13,6 +14,8 @@ const ICONS = [
 ];
 
 export default function LiquidSoftwareStack() {
+  const { isLiteMode } = usePerformance();
+
   return (
     <section style={{ padding: '6rem 2rem', background: '#0a0a0a', textAlign: 'center', overflow: 'hidden' }}>
       <p className="section-tag mono" style={{ color: '#a78bfa', marginBottom: '0.5rem' }}>{'// TOOL_STACK'}</p>
@@ -48,23 +51,25 @@ export default function LiquidSoftwareStack() {
             }}
           >
             {/* Liquid inner glow blob */}
-            <motion.div
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3],
-                rotate: [0, 90, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
-              style={{
-                position: 'absolute',
-                top: '-30%',
-                left: '-30%',
-                width: '160%',
-                height: '160%',
-                background: 'radial-gradient(circle, rgba(132,0,255,0.15) 0%, transparent 60%)',
-                pointerEvents: 'none',
-              }} 
-            />
+            {!isLiteMode && (
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                  rotate: [0, 90, 0]
+                }}
+                transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                style={{
+                  position: 'absolute',
+                  top: '-30%',
+                  left: '-30%',
+                  width: '160%',
+                  height: '160%',
+                  background: 'radial-gradient(circle, rgba(132,0,255,0.15) 0%, transparent 60%)',
+                  pointerEvents: 'none',
+                }} 
+              />
+            )}
             
             <img src={icon.url} alt={icon.name} style={{ width: '45px', height: '45px', filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.2))', zIndex: 1 }} />
             <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', fontFamily: 'monospace', zIndex: 1, marginTop: '5px' }}>{icon.name}</span>

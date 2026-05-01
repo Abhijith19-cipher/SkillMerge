@@ -22,6 +22,22 @@
   will-change: transform;
 }
 
+.video-marquee-container.lite-mode {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Hide scrollbar for cleaner look */
+}
+
+.video-marquee-container.lite-mode::-webkit-scrollbar {
+  display: none;
+}
+
+.video-marquee-container.lite-mode .video-marquee-track {
+  animation: none;
+  width: auto;
+  padding: 0 1rem;
+}
+
 .video-marquee-track:hover {
   animation-play-state: paused;
 }

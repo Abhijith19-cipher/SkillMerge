@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  pointer-events: none; /* Block clicks during loading but don't eat them after */
+  pointer-events: all; /* Allow clicks on buttons */
 }
 
 /* ─── Split Screen Panels ─── */

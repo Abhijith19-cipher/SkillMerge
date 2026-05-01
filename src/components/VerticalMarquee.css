@@ -61,6 +61,29 @@
   100% { transform: translateY(0); }
 }
 
+/* Lite Mode Overrides */
+.vm-container.lite-mode {
+  -webkit-mask-image: none;
+  mask-image: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  height: auto;
+  max-height: 80vh;
+}
+
+.vm-container.lite-mode::-webkit-scrollbar {
+  display: none;
+}
+
+.vm-container.lite-mode .vm-col {
+  overflow: visible;
+}
+
+.vm-container.lite-mode .vm-col .vm-track {
+  animation: none !important;
+}
+
 /* Card Items */
 .vm-item {
   position: relative;

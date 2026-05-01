@@ -56,13 +56,15 @@ function HeroScene() {
     <Canvas
       camera={{ position: [0, 0, 6], fov: 50 }}
       style={{ position: 'absolute', inset: 0 }}
-      gl={{ antialias: true, alpha: true }}
+      gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+      dpr={[1, 1.5]}
+      performance={{ min: 0.5 }}
     >
       <ambientLight intensity={0.3} />
       <pointLight position={[5, 5, 5]} intensity={1.5} color="#6b21e8" />
       <pointLight position={[-5, -3, 3]} intensity={0.8} color="#c026d3" />
       <pointLight position={[0, -5, -5]} intensity={0.5} color="#e879f9" />
-      <Stars radius={80} depth={60} count={1500} factor={3} saturation={0.5} fade speed={1.5} />
+      <Stars radius={80} depth={60} count={window.innerWidth < 768 ? 400 : 1500} factor={3} saturation={0.5} fade speed={1.5} />
       <CyberSphere />
       <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
     </Canvas>

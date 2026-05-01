@@ -150,10 +150,11 @@ export default function CourseReviewsSection() {
 
         {/* Stack + Side reviews layout */}
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          display: 'flex',
+          flexWrap: 'wrap',
           gap: '4rem',
           alignItems: 'center',
+          justifyContent: 'center',
           maxWidth: '1000px',
           margin: '0 auto',
         }}>
@@ -163,7 +164,7 @@ export default function CourseReviewsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', flex: '1 1 340px' }}
           >
             <div style={{ width: '340px', height: '300px', position: 'relative' }}>
               <Stack
@@ -188,7 +189,7 @@ export default function CourseReviewsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '420px', overflowY: 'auto',
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '420px', overflowY: 'auto', flex: '1 1 340px',
               scrollbarWidth: 'thin', scrollbarColor: 'rgba(107,33,232,0.4) transparent' }}
           >
             {REVIEWS.map((review, i) => (

@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import logoSrc from '../assets/logo.svg'
 import PixelBlast from './PixelBlast'
 import Shuffle from './Shuffle'
-import { usePerformance } from '../context/PerformanceContext'
+import { useIsMobile } from '../hooks/useIsMobile'
 import './Hero.css'
 
-/* ─── Main Headings ─── */
 const MAIN_HEADINGS = [
   "Kerala's No.1 ethical hacking course provider",
   "Kerala's first career-focused cybersecurity academy",
   "Training the next generation of cybersecurity professionals",
 ]
 
-/* ─── Sub Texts ─── */
 const SUB_TEXTS = [
   ">_ MASTER CYBERSECURITY",
   ">_ SECURE YOUR FUTURE",
@@ -24,7 +22,6 @@ const SUB_TEXTS = [
   ">_ HANDS-ON TRAINING",
 ]
 
-/* ─── Motion Variants ─── */
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.15, delayChildren: 0.4 } },
@@ -34,7 +31,7 @@ const item = {
   show: { y: 0, opacity: 1, transition: { type: 'spring', damping: 22 } },
 }
 
-function AnimatedHeroTexts({ isLiteMode }) {
+function AnimatedHeroTexts({ isMobile }) {
   const [lineIdx, setLineIdx] = useState(0)
 
   useEffect(() => {
@@ -46,9 +43,8 @@ function AnimatedHeroTexts({ isLiteMode }) {
 
   return (
     <div className="hero-texts-container">
-      {/* Main heading */}
       <div className="hero-heading-wrapper">
-        {isLiteMode ? (
+        {isMobile ? (
           <h1 className="hero-heading-shuffle" style={{ textAlign: 'center', transition: 'opacity 0.5s', opacity: 1 }}>
             {MAIN_HEADINGS[lineIdx]}
           </h1>
@@ -76,10 +72,9 @@ function AnimatedHeroTexts({ isLiteMode }) {
         )}
       </div>
 
-      {/* Subtext */}
       <div className="hero-subtext-wrapper">
         <img src={logoSrc} alt="SkillMerge" className="hero-subtext-icon" />
-        {isLiteMode ? (
+        {isMobile ? (
           <h2 className="hero-subtext-shuffle mono" style={{ textAlign: 'left', transition: 'opacity 0.5s', opacity: 1 }}>
             {SUB_TEXTS[lineIdx]}
           </h2>
@@ -110,14 +105,13 @@ function AnimatedHeroTexts({ isLiteMode }) {
   )
 }
 
-/* ─── Hero Component ─── */
 export default function Hero() {
-  const { isLiteMode } = usePerformance();
+  const isMobile = useIsMobile();
 
   return (
     <section id="home" className="hero-section">
-      {/* Background */}
-      {!isLiteMode && (
+      {/* Background — skip on mobile to save GPU */}
+      {!isMobile && (
         <div className="hero-pixelblast-bg">
           <PixelBlast
             variant="square"
@@ -141,31 +135,26 @@ export default function Hero() {
         </div>
       )}
 
-      {/* Centered HTML Overlay */}
       <motion.div
         className="hero-overlay"
         variants={container}
-        initial={isLiteMode ? "show" : "hidden"}
+        initial={isMobile ? "show" : "hidden"}
         animate="show"
       >
-        {/* Badge */}
-        <motion.div className="hero-badge" variants={isLiteMode ? {} : item}>
+        <motion.div className="hero-badge" variants={isMobile ? {} : item}>
           <span className="badge-dot" />
           <span className="mono">APPLICATIONS NOW OPEN</span>
         </motion.div>
 
-        {/* Main Headings & Subtext */}
-        <AnimatedHeroTexts isLiteMode={isLiteMode} />
+        <AnimatedHeroTexts isMobile={isMobile} />
 
-        {/* CTA Buttons */}
-        <motion.div className="hero-cta-row" variants={isLiteMode ? {} : item}>
+        <motion.div className="hero-cta-row" variants={isMobile ? {} : item}>
           <a href="#courses" className="hero-cta-primary">Explore Courses</a>
           <a href="#contact" className="hero-cta-secondary">Get In Touch</a>
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      {!isLiteMode && (
+      {!isMobile && (
         <motion.div
           className="hero-scroll-indicator"
           animate={{ y: [0, 10, 0] }}

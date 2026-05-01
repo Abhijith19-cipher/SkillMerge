@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  pointer-events: all; /* Allow clicks on buttons */
+  pointer-events: none; /* No interactive buttons — passes clicks through to app below */
 }
 
 /* ─── Split Screen Panels ─── */

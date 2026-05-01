@@ -1,7 +1,7 @@
 import React from 'react';
 import Stack from './Stack';
 import { motion } from 'motion/react';
-import { usePerformance } from '../context/PerformanceContext';
+import { useIsMobile } from '../hooks/useIsMobile';
 import './CourseReviewsSection.css';
 
 const REVIEWS = [
@@ -122,7 +122,7 @@ function ReviewCard({ review }) {
 }
 
 export default function CourseReviewsSection() {
-  const { isLiteMode } = usePerformance();
+  const isMobile = useIsMobile();
 
   const stackCards = REVIEWS.map((review, i) => (
     <ReviewCard key={i} review={review} />
@@ -173,14 +173,14 @@ export default function CourseReviewsSection() {
           >
             <div style={{ width: '340px', height: '300px', position: 'relative' }}>
               <Stack
-                randomRotation={!isLiteMode}
+                randomRotation={!isMobile}
                 sensitivity={150}
                 sendToBackOnClick
-                autoplay={!isLiteMode}
+                autoplay={!isMobile}
                 autoplayDelay={3500}
                 pauseOnHover
                 cards={stackCards}
-                animationConfig={isLiteMode ? { duration: 0 } : { stiffness: 220, damping: 22 }}
+                animationConfig={isMobile ? { duration: 0 } : { stiffness: 220, damping: 22 }}
               />
             </div>
             <p style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#6b7280', textAlign: 'center' }}>

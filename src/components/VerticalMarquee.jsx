@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { usePerformance } from '../context/PerformanceContext';
+import { useIsMobile } from '../hooks/useIsMobile';
 import './VerticalMarquee.css';
 
 export default function VerticalMarquee({ items }) {
   const [selectedStory, setSelectedStory] = useState(null);
-  const { isLiteMode } = usePerformance();
+  const isMobile = useIsMobile();
 
   // Split items into 3 columns
   const col1 = [];
@@ -19,8 +19,8 @@ export default function VerticalMarquee({ items }) {
   });
 
   const renderCol = (colItems, direction) => {
-    // Duplicate array for seamless scrolling, only if not in lite mode
-    const renderedItems = isLiteMode ? colItems : [...colItems, ...colItems];
+    // Duplicate array for seamless scrolling, only if not on mobile
+    const renderedItems = isMobile ? colItems : [...colItems, ...colItems];
     return (
       <div className={`vm-col ${direction}`}>
         <div className="vm-track">
@@ -43,7 +43,7 @@ export default function VerticalMarquee({ items }) {
 
   return (
     <>
-      <div className={`vm-container ${isLiteMode ? 'lite-mode' : ''}`}>
+      <div className={`vm-container ${isMobile ? 'lite-mode' : ''}`}>
         {renderCol(col1, 'up')}
         {renderCol(col2, 'down')}
         {renderCol(col3, 'up')}

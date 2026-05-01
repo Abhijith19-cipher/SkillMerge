@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'motion/react'
-import { usePerformance } from '../context/PerformanceContext'
+import { useIsMobile } from '../hooks/useIsMobile'
 import './GlobalPartners.css'
 
 // Import partner images
@@ -17,7 +17,7 @@ const PARTNERS = [
 ]
 
 export default function GlobalPartners() {
-  const { isLiteMode } = usePerformance()
+  const isMobile = useIsMobile()
   return (
     <section className="global-partners-section">
       <div className="partners-header">
@@ -26,10 +26,9 @@ export default function GlobalPartners() {
       </div>
 
       {/* Marquee Container */}
-      <div className={`marquee-container${isLiteMode ? ' lite-mode' : ''}`}>
-        {/* Left/Right fade overlays — hidden in lite mode */}
-        {!isLiteMode && <div className="marquee-overlay-left" />}
-        {!isLiteMode && <div className="marquee-overlay-right" />}
+      <div className={`marquee-container${isMobile ? ' lite-mode' : ''}`}>
+        {!isMobile && <div className="marquee-overlay-left" />}
+        {!isMobile && <div className="marquee-overlay-right" />}
 
         <div className="marquee-track">
           {/* First set */}
@@ -40,8 +39,7 @@ export default function GlobalPartners() {
               </div>
             ))}
           </div>
-          {/* Duplicate set for infinite scroll — skip in lite mode */}
-          {!isLiteMode && (
+          {!isMobile && (
             <div className="marquee-content" aria-hidden="true">
               {PARTNERS.map((partner) => (
                 <div key={`set2-${partner.id}`} className="partner-logo-wrapper">

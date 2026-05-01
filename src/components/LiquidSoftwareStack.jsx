@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { usePerformance } from '../context/PerformanceContext';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const ICONS = [
   { name: 'Kali Linux', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
@@ -14,7 +14,7 @@ const ICONS = [
 ];
 
 export default function LiquidSoftwareStack() {
-  const { isLiteMode } = usePerformance();
+  const isMobile = useIsMobile();
 
   return (
     <section style={{ padding: '6rem 2rem', background: '#0a0a0a', textAlign: 'center', overflow: 'hidden' }}>
@@ -50,8 +50,8 @@ export default function LiquidSoftwareStack() {
               overflow: 'hidden'
             }}
           >
-            {/* Liquid inner glow blob */}
-            {!isLiteMode && (
+            {/* Liquid inner glow blob — skip on mobile */}
+            {!isMobile && (
               <motion.div
                 animate={{ 
                   scale: [1, 1.2, 1],

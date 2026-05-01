@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import './SplashScreen.css';
 import logoSrc from '../assets/skillmerge-logo.png';
 import DecryptedText from './DecryptedText';
-import { usePerformance } from '../context/PerformanceContext';
 
 export default function SplashScreen({ onComplete }) {
   const containerRef = useRef(null);
@@ -15,43 +14,28 @@ export default function SplashScreen({ onComplete }) {
   const logoImgRef = useRef(null);
   const lineRef = useRef(null);
 
-  const { isLiteMode, setLiteMode, hasChosen } = usePerformance();
   const [isVisible, setIsVisible] = useState(true);
 
-  // If the user already made a choice previously, start the exit animation immediately.
   useEffect(() => {
-    if (hasChosen) {
-      if (isLiteMode) {
-        playLiteExit();
-      } else {
-        playFullAnimation();
-      }
-    } else {
-      // If no choice made yet, just fade in the logo and buttons gently.
-      gsap.to(logoImgRef.current, { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' });
-      gsap.to(textRef.current, { opacity: 1, y: 0, duration: 1, delay: 0.5 });
-      gsap.to('.performance-buttons', { opacity: 1, y: 0, duration: 1, delay: 1 });
+    // On mobile: fast fade-out, skip the heavy split animation
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      gsap.to(logoImgRef.current, { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' });
+      gsap.to(containerRef.current, {
+        opacity: 0,
+        duration: 0.6,
+        delay: 1.2,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          setIsVisible(false);
+          if (onComplete) onComplete();
+        }
+      });
+      return;
     }
-  }, [hasChosen, isLiteMode]);
 
-  const handleChoice = (lite) => {
-    setLiteMode(lite);
-    // The useEffect will trigger the correct exit animation now because hasChosen changes
-  };
-
-  const playLiteExit = () => {
-    gsap.to(containerRef.current, {
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        setIsVisible(false);
-        if (onComplete) onComplete();
-      }
-    });
-  };
-
-  const playFullAnimation = () => {
+    // Desktop: full split-panel animation
     const tl = gsap.timeline({
       onComplete: () => {
         setIsVisible(false);
@@ -63,23 +47,22 @@ export default function SplashScreen({ onComplete }) {
 
     gsap.set(lineRef.current, { strokeDasharray: 150, strokeDashoffset: 150, strokeWidth: 0.5, opacity: 1 });
     tl.to(logoImgRef.current, { opacity: 1, scale: 1, duration: 0.5 });
-    
+
     if (textRef.current) {
-      tl.to(textRef.current, { opacity: 1, y: 0, duration: 0.8 }, "-=0.2");
+      tl.to(textRef.current, { opacity: 1, y: 0, duration: 0.8 }, '-=0.2');
     }
-    
-    tl.to('.performance-buttons', { opacity: 0, duration: 0.3 }, "-=0.8");
-    tl.to(sweepRef.current, { left: "120%", top: "-20%", duration: 0.8, ease: "power2.inOut" }, "-=0.2");
-    tl.to(logoWrapperRef.current, { scale: 1.08, filter: "drop-shadow(0px 0px 20px rgba(192, 38, 211, 0.8))", duration: 0.6, ease: "power2.out" });
 
-    tl.to([logoWrapperRef.current, textRef.current], { opacity: 0, duration: 0.6, ease: "power2.inOut" }, "line");
-    tl.to(lineRef.current, { strokeDashoffset: 0, duration: 0.8, ease: "power3.inOut" }, "line");
-    tl.to(lineRef.current, { strokeWidth: 4, filter: "drop-shadow(0 0 4px rgba(192, 38, 211, 0.6))", duration: 0.4, ease: "power2.out" }, "expand");
+    tl.to(sweepRef.current, { left: '120%', top: '-20%', duration: 0.8, ease: 'power2.inOut' }, '-=0.2');
+    tl.to(logoWrapperRef.current, { scale: 1.08, filter: 'drop-shadow(0px 0px 20px rgba(192, 38, 211, 0.8))', duration: 0.6, ease: 'power2.out' });
 
-    tl.to(leftPanelRef.current, { x: "-100%", y: "-100%", duration: 1.2, ease: "power4.inOut" }, "split+=0.1");
-    tl.to(rightPanelRef.current, { x: "100%", y: "100%", duration: 1.2, ease: "power4.inOut" }, "split+=0.1");
-    tl.to(lineRef.current, { opacity: 0, duration: 0.4 }, "split+=0.1");
-  };
+    tl.to([logoWrapperRef.current, textRef.current], { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, 'line');
+    tl.to(lineRef.current, { strokeDashoffset: 0, duration: 0.8, ease: 'power3.inOut' }, 'line');
+    tl.to(lineRef.current, { strokeWidth: 4, filter: 'drop-shadow(0 0 4px rgba(192, 38, 211, 0.6))', duration: 0.4, ease: 'power2.out' }, 'expand');
+
+    tl.to(leftPanelRef.current, { x: '-100%', y: '-100%', duration: 1.2, ease: 'power4.inOut' }, 'split+=0.1');
+    tl.to(rightPanelRef.current, { x: '100%', y: '100%', duration: 1.2, ease: 'power4.inOut' }, 'split+=0.1');
+    tl.to(lineRef.current, { opacity: 0, duration: 0.4 }, 'split+=0.1');
+  }, []);
 
   if (!isVisible) return null;
 
@@ -114,25 +97,6 @@ export default function SplashScreen({ onComplete }) {
             encryptedClassName="splash-encrypted"
           />
         </h2>
-        
-        <div className="performance-buttons" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '2rem', opacity: 0, transform: 'translateY(10px)' }}>
-          <button 
-            onClick={() => handleChoice(false)}
-            className="cyber-btn"
-            style={{ padding: '0.8rem 1.5rem', fontSize: '0.9rem' }}
-          >
-            ENHANCED MODE
-            <span style={{ display: 'block', fontSize: '0.7rem', opacity: 0.7, marginTop: '4px' }}>(3D & Animations)</span>
-          </button>
-          <button 
-            onClick={() => handleChoice(true)}
-            className="cyber-btn cyber-btn-outline"
-            style={{ padding: '0.8rem 1.5rem', fontSize: '0.9rem' }}
-          >
-            LITE MODE
-            <span style={{ display: 'block', fontSize: '0.7rem', opacity: 0.7, marginTop: '4px' }}>(Smooth & Fast)</span>
-          </button>
-        </div>
       </div>
     </div>
   );

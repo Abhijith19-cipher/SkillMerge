@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { usePerformance } from '../context/PerformanceContext';
+import { useIsMobile } from '../hooks/useIsMobile';
 import './VideoMarquee.css';
 
 const VIDEOS = [
@@ -54,9 +54,9 @@ function VideoItem({ video, isTop, onClick }) {
 
 export default function VideoMarquee() {
   const [activeVideo, setActiveVideo] = useState(null);
-  const { isLiteMode } = usePerformance();
-  // Only duplicate items if not in Lite mode to save memory/DOM nodes
-  const marqueeItems = isLiteMode ? VIDEOS : [...VIDEOS, ...VIDEOS];
+  const isMobile = useIsMobile();
+  // Only duplicate items on desktop to save memory/DOM nodes on mobile
+  const marqueeItems = isMobile ? VIDEOS : [...VIDEOS, ...VIDEOS];
   const textItems = [...HACKING_TEXTS, ...HACKING_TEXTS, ...HACKING_TEXTS];
 
   return (
@@ -65,7 +65,7 @@ export default function VideoMarquee() {
         <p className="section-tag mono" style={{ textAlign: 'center' }}>{'// CAMPUS_LIFE'}</p>
         <h2 className="neon-text" style={{ textAlign: 'center' }}>Video Gallery</h2>
       </div>
-      <div className={`video-marquee-container ${isLiteMode ? 'lite-mode' : ''}`}>
+      <div className={`video-marquee-container ${isMobile ? 'lite-mode' : ''}`}>
         <div className="video-marquee-track">
           {marqueeItems.map((video, idx) => {
             const isTop = idx % 2 === 0;

@@ -1,0 +1,307 @@
+/* ═══════════════════════════════════════════════════════════════════
+   WhyChooseUs.css — Hacking Terminal & Custom Cursor
+   ═══════════════════════════════════════════════════════════════════ */
+
+.why-choose-section {
+  position: relative;
+  width: 100%;
+  padding: 6rem 2rem;
+  background-color: var(--bg-body, #000000);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible; /* allow BorderGlow's outer glow to bleed out */
+}
+
+/* ─── BorderGlow wrapper sizing ─── */
+.terminal-border-glow {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-tag {
+  color: var(--primary-light);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--text);
+}
+
+/* ─── Terminal Wrapper & Custom Cursor ─── */
+.terminal-wrapper {
+  position: relative;
+  width: 100%;
+  cursor: none;
+}
+
+.terminal-wrapper:hover * {
+  cursor: none !important;
+}
+
+/* The custom watch reel floating cursor */
+.watch-reel-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: transparent; /* Fully transparent */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* A circle */
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Don't block clicks */
+  z-index: 999999;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* subtle glow */
+  color: #ffffff; /* White text instead of black */
+  transform-origin: center;
+  will-change: transform;
+}
+
+.reel-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 2px;
+}
+
+.reel-text {
+  font-family: var(--font-heading);
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 1;
+}
+
+/* ─── Hacker Terminal Window ─── */
+/* Note: border/background is now handled by <BorderGlow> wrapper */
+.hacker-terminal {
+  background: transparent; /* BorderGlow provides the background */
+  border: none;            /* BorderGlow provides the border glow */
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.terminal-wrapper:hover .hacker-terminal {
+  transform: translateY(-2px);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(107, 33, 232, 0.2);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 8px;
+  margin-right: 1.5rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.dot.red { background-color: #ff5f56; }
+.dot.yellow { background-color: #ffbd2e; }
+.dot.green { background-color: #27c93f; }
+
+.terminal-title {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* ─── Terminal Body & Content ─── */
+.terminal-body {
+  padding: 2.5rem;
+}
+
+.terminal-prompt {
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prompt-arrow {
+  color: #27c93f; /* Hacker Green */
+  margin-right: 0.5rem;
+}
+
+.prompt-cmd {
+  color: #22d3ee; /* Cyan */
+}
+
+.loading-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+  animation: pulse-opacity 2s infinite;
+}
+
+@keyframes pulse-opacity {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Grid Layout for Features */
+.terminal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem 2rem;
+}
+
+.terminal-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.feature-icon-wrapper {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(107, 33, 232, 0.2);
+  border: 1px solid rgba(192, 38, 211, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--highlight);
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(107, 33, 232, 0.3);
+}
+
+.feature-content {
+  flex-grow: 1;
+}
+
+.feature-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.feature-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mt-prompt {
+  margin-top: 3rem;
+  margin-bottom: 0;
+}
+
+.blinking {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .terminal-body {
+    padding: 1.5rem;
+  }
+  .terminal-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  /* On mobile, custom cursor is tricky, ensure default cursor is shown if touch */
+  @media (hover: none) {
+    .terminal-wrapper {
+      cursor: pointer;
+    }
+    .watch-reel-cursor {
+      display: none;
+    }
+  }
+}
+
+/* ─── Embedded Video Modal ─── */
+.video-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.98); /* Fully opaque black */
+  z-index: 9999999; /* Above the custom cursor */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: auto; /* Restore normal cursor in modal */
+}
+
+.video-modal-content {
+  width: fit-content;
+  height: fit-content;
+  max-width: 95vw;
+  max-height: 95vh;
+  background: rgba(10, 5, 20, 0.95);
+  border: 1px solid rgba(192, 38, 211, 0.5);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(107, 33, 232, 0.3);
+  position: relative;
+}
+
+.close-video-btn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: var(--primary-light);
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.close-video-btn:hover {
+  color: var(--highlight);
+  opacity: 1;
+  text-shadow: 0 0 10px var(--highlight);
+}
+
+.iframe-wrapper {
+  position: relative;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.iframe-wrapper video {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 85vh;
+  display: block;
+}

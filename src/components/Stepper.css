@@ -1,0 +1,247 @@
+/* ── Stepper Component ─────────────────────────────────── */
+/* Namespaced with "stepper-" prefix to avoid global conflicts */
+
+.stepper-outer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.stepper-circle-container {
+  width: 100%;
+  max-width: 640px;
+  border-radius: 1.5rem;
+  background: rgba(10, 0, 24, 0.75);
+  border: 1px solid rgba(132, 0, 255, 0.35);
+  box-shadow:
+    0 0 40px rgba(107, 33, 232, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+/* ── Indicator row ── */
+.stepper-indicator-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 2rem 2rem 1.5rem;
+}
+
+/* ── Step circle ── */
+.stepper-step-indicator {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.stepper-step-indicator-inner {
+  display: flex;
+  height: 2.2rem;
+  width: 2.2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  transition: box-shadow 0.3s;
+}
+
+.stepper-step-indicator:hover .stepper-step-indicator-inner {
+  box-shadow: 0 0 12px rgba(107, 33, 232, 0.5);
+}
+
+.stepper-active-dot {
+  height: 0.7rem;
+  width: 0.7rem;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.stepper-step-number {
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #6b7280;
+}
+
+.stepper-check-icon {
+  height: 1rem;
+  width: 1rem;
+  color: #a78bfa;
+}
+
+/* ── Connector line ── */
+.stepper-connector {
+  position: relative;
+  margin: 0 0.5rem;
+  height: 2px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(132, 0, 255, 0.15);
+}
+
+.stepper-connector-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #6b21e8, #a78bfa);
+  box-shadow: 0 0 8px rgba(107, 33, 232, 0.6);
+}
+
+/* ── Content area ── */
+.stepper-content-default {
+  position: relative;
+  overflow: hidden;
+}
+
+.stepper-step-default {
+  padding: 0.5rem 2rem 1rem;
+}
+
+.stepper-step-default h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.stepper-step-default h3 {
+  font-size: 1rem;
+  color: #a78bfa;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.stepper-step-default p {
+  color: rgba(196, 181, 253, 0.8);
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.stepper-step-default ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stepper-step-default ul li {
+  color: rgba(196, 181, 253, 0.8);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  line-height: 1.5;
+}
+
+.stepper-step-default ul li::before {
+  content: '▸';
+  color: #a78bfa;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+
+.stepper-step-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.stepper-step-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #a78bfa;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+/* ── Completed state ── */
+.stepper-completed {
+  text-align: center;
+  padding: 2rem;
+  color: #4ade80;
+}
+
+/* ── Footer ── */
+.stepper-footer-container {
+  padding: 0 2rem 2rem;
+  border-top: 1px solid rgba(132, 0, 255, 0.1);
+  margin-top: 1rem;
+}
+
+.stepper-footer-nav {
+  padding-top: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.stepper-footer-nav.spread {
+  justify-content: space-between;
+}
+
+.stepper-footer-nav.end {
+  justify-content: flex-end;
+}
+
+.stepper-back-button {
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  transition: color 0.25s, background 0.25s;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+.stepper-back-button:hover {
+  color: #a78bfa;
+  background: rgba(107, 33, 232, 0.1);
+}
+
+.stepper-back-button.inactive {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.stepper-next-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: none;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #6b21e8, #8b21e8);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 1.4rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 0 20px rgba(107, 33, 232, 0.4);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.stepper-next-button:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 0 30px rgba(107, 33, 232, 0.6);
+}
+
+.stepper-next-button:active {
+  transform: scale(0.98);
+}

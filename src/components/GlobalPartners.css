@@ -1,0 +1,122 @@
+/* ═══════════════════════════════════════════════════════════════════
+   GlobalPartners.css — Infinite Marquee Component
+   ═══════════════════════════════════════════════════════════════════ */
+
+.global-partners-section {
+  position: relative;
+  width: 100%;
+  padding: 6rem 0;
+  background-color: var(--bg-body, #000000);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  border-top: 1px solid rgba(107, 33, 232, 0.15);
+}
+
+.partners-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.partners-tag {
+  color: var(--primary-light);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.partners-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--text);
+  background: linear-gradient(135deg, var(--text), var(--text-muted));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Marquee Layout ─── */
+.marquee-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Gradients for fading edges */
+.marquee-overlay-left,
+.marquee-overlay-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-overlay-left {
+  left: 0;
+  background: linear-gradient(to right, #000000, transparent);
+}
+
+.marquee-overlay-right {
+  right: 0;
+  background: linear-gradient(to left, #000000, transparent);
+}
+
+/* ─── Track & Animation ─── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  /* Hover to pause */
+}
+
+.marquee-track:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  gap: 4rem;
+  padding: 0 2rem;
+  animation: scroll-marquee 6s linear infinite;
+}
+
+@keyframes scroll-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Partner Logos ─── */
+.partner-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 100px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.partner-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* Dark theme integration */
+  filter: grayscale(100%) brightness(0.8);
+  opacity: 0.6;
+  transition: all 0.4s ease;
+}
+
+.partner-logo-wrapper:hover .partner-logo {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 15px rgba(192, 38, 211, 0.4));
+}

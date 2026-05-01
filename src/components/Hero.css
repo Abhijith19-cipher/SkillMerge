@@ -1,0 +1,283 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Hero.css — Full-viewport Hero Section (Centered Layout)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+/* ─── PixelBlast Full-Section Background ─── */
+.hero-pixelblast-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* ─── Centered HTML Overlay ─── */
+.hero-overlay {
+  position: relative;
+  z-index: 10;
+  max-width: 860px;
+  width: 100%;
+  padding: 7rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.75rem;
+  pointer-events: none;
+}
+
+/* Re-enable pointer events for interactive elements */
+.hero-overlay > * {
+  pointer-events: auto;
+}
+
+/* ─── Badge ─── */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1.2rem;
+  background: rgba(107, 33, 232, 0.15);
+  border: 1px solid rgba(107, 33, 232, 0.4);
+  border-radius: 99px;
+  width: fit-content;
+  font-size: var(--font-size-xs);
+  color: var(--highlight);
+  letter-spacing: 0.14em;
+  backdrop-filter: blur(8px);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 8px #22d3ee;
+  animation: badge-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ─── Text Container ─── */
+.hero-texts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+/* ─── Shuffle Main Heading ─── */
+.hero-heading-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 220px;
+}
+
+.hero-heading-shuffle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+  display: block;
+  margin: 0;
+  text-align: center;
+}
+
+/* ─── Subtext Wrapper ─── */
+.hero-subtext-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.hero-subtext-icon {
+  height: 22px;
+  width: auto;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 8px var(--accent));
+  animation: icon-pulse 3s infinite alternate;
+  flex-shrink: 0;
+}
+
+@keyframes icon-pulse {
+  0% { opacity: 0.6; filter: drop-shadow(0 0 4px var(--accent)); }
+  100% { opacity: 1; filter: drop-shadow(0 0 14px var(--highlight)); }
+}
+
+/* ─── Shuffle Subtext ─── */
+.hero-subtext-shuffle {
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  color: var(--text-muted);
+  margin: 0;
+  font-family: var(--font-mono) !important;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  text-transform: uppercase;
+  /* Override global h2 uppercase/heading defaults */
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--text-muted) !important;
+}
+
+/* ─── CTA Buttons ─── */
+.hero-cta-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.hero-cta-primary {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border: 1px solid rgba(192, 38, 211, 0.4);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 2.2rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 24px rgba(107, 33, 232, 0.35);
+  transition: filter 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+.hero-cta-primary:hover {
+  filter: brightness(1.18);
+  box-shadow: 0 0 36px rgba(107, 33, 232, 0.5);
+  color: #fff;
+}
+.hero-cta-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  transition: left 0.5s ease;
+}
+.hero-cta-primary:hover::before {
+  left: 100%;
+}
+
+.hero-cta-secondary {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 2.2rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
+  text-decoration: none;
+  display: inline-block;
+}
+.hero-cta-secondary:hover {
+  color: var(--text);
+  border-color: var(--border-bright);
+  background: rgba(107, 33, 232, 0.12);
+}
+
+/* ─── Scroll Indicator ─── */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+  color: var(--text-dim);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.2em;
+  pointer-events: none;
+}
+
+.scroll-chevron {
+  width: 18px;
+  height: 18px;
+  border-right: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+  transform: rotate(45deg);
+  opacity: 0.6;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .hero-overlay {
+    padding: 6rem 1.5rem 3rem;
+    max-width: 100%;
+  }
+  .hero-heading-wrapper {
+    min-height: 200px;
+  }
+  .hero-heading-shuffle {
+    font-size: clamp(1.6rem, 7vw, 2.6rem);
+  }
+  .hero-texts-container {
+    gap: 1rem;
+  }
+  .hero-cta-row {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-overlay {
+    padding: 5rem 1.25rem 3rem;
+    gap: 1.25rem;
+  }
+  .hero-heading-wrapper {
+    min-height: 260px;
+  }
+  .hero-cta-row {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .hero-cta-primary,
+  .hero-cta-secondary {
+    text-align: center;
+  }
+  .hero-subtext-wrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

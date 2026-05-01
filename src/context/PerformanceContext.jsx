@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 export const PerformanceContext = createContext({
   isLiteMode: false,
@@ -13,19 +13,9 @@ export function PerformanceProvider({ children }) {
   const [isLiteMode, setIsLiteMode] = useState(false);
   const [hasChosen, setHasChosen] = useState(false);
 
-  useEffect(() => {
-    // Check if user already made a choice in a previous session
-    const storedPreference = localStorage.getItem('skillmerge_performance_mode');
-    if (storedPreference !== null) {
-      setIsLiteMode(storedPreference === 'lite');
-      setHasChosen(true);
-    }
-  }, []);
-
   const handleSetLiteMode = (value) => {
     setIsLiteMode(value);
     setHasChosen(true);
-    localStorage.setItem('skillmerge_performance_mode', value ? 'lite' : 'enhanced');
   };
 
   return (

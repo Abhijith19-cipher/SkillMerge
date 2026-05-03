@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import logoSrc from '../assets/logo.svg'
 import PixelBlast from './PixelBlast'
 import Shuffle from './Shuffle'
+import AnimatedContent from './AnimatedContent'
 import { useIsMobile } from '../hooks/useIsMobile'
 import './Hero.css'
 
@@ -141,10 +142,23 @@ export default function Hero() {
         initial={isMobile ? "show" : "hidden"}
         animate="show"
       >
-        <motion.div className="hero-badge" variants={isMobile ? {} : item}>
-          <span className="badge-dot" />
-          <span className="mono">APPLICATIONS NOW OPEN</span>
-        </motion.div>
+        <AnimatedContent
+          distance={150}
+          direction="vertical"
+          reverse={false}
+          duration={1.2}
+          ease="elastic.out(1, 0.5)"
+          initialOpacity={0}
+          animateOpacity={true}
+          scale={0.9}
+          threshold={0.1}
+          delay={isMobile ? 0 : 0.4}
+        >
+          <div className="hero-badge">
+            <span className="badge-dot" />
+            <span className="mono">APPLICATIONS NOW OPEN</span>
+          </div>
+        </AnimatedContent>
 
         <AnimatedHeroTexts isMobile={isMobile} />
 

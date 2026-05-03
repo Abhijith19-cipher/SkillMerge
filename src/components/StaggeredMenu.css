@@ -28,6 +28,7 @@
   background: transparent;
   pointer-events: none;
   z-index: 20;
+  mix-blend-mode: difference;
 }
 
 .staggered-menu-header > * {

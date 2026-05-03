@@ -77,7 +77,7 @@ const AnimatedContent = ({
 
     const st = ScrollTrigger.create({
       trigger: el,
-      scroller: scrollerTarget,
+      ...(scrollerTarget ? { scroller: scrollerTarget } : {}),
       start: `top ${startPct}%`,
       once: true,
       onEnter: () => tl.play()

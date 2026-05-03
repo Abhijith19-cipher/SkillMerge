@@ -4,6 +4,12 @@
   height: 100%;
   z-index: 40;
   pointer-events: none;
+  mix-blend-mode: difference;
+  transition: mix-blend-mode 0.3s ease;
+}
+
+.staggered-menu-wrapper[data-open] {
+  mix-blend-mode: normal;
 }
 
 .staggered-menu-wrapper.fixed-wrapper {
@@ -28,7 +34,6 @@
   background: transparent;
   pointer-events: none;
   z-index: 20;
-  mix-blend-mode: difference;
 }
 
 .staggered-menu-header > * {

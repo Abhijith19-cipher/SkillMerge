@@ -75,16 +75,32 @@ const AnimatedContent = ({
       ease
     });
 
-    const st = ScrollTrigger.create({
-      trigger: el,
-      ...(scrollerTarget ? { scroller: scrollerTarget } : {}),
-      start: `top ${startPct}%`,
-      once: true,
-      onEnter: () => tl.play()
-    });
+    // Check if element is already visible in viewport on mount
+    // If so, play immediately — ScrollTrigger onEnter won't fire for above-the-fold elements
+    const rect = el.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const isAlreadyVisible = rect.top < viewportHeight * (startPct / 100);
+
+    let st = null;
+    if (isAlreadyVisible) {
+      // Play directly after a small settle delay
+      const timer = setTimeout(() => tl.play(), delay * 1000 + 100);
+      return () => {
+        clearTimeout(timer);
+        tl.kill();
+      };
+    } else {
+      st = ScrollTrigger.create({
+        trigger: el,
+        ...(scrollerTarget ? { scroller: scrollerTarget } : {}),
+        start: `top ${startPct}%`,
+        once: true,
+        onEnter: () => tl.play()
+      });
+    }
 
     return () => {
-      st.kill();
+      st?.kill();
       tl.kill();
     };
   }, [

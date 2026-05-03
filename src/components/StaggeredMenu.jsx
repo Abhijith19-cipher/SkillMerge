@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './StaggeredMenu.css';
 
@@ -40,6 +40,24 @@ export const StaggeredMenu = ({
   const toggleBtnRef = useRef(null);
   const busyRef = useRef(false);
   const itemEntranceTweenRef = useRef(null);
+  const headerRef = useRef(null);
+
+  // Scroll-based transparent header: becomes frosted glass once past the hero
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const onScroll = () => {
+      const heroHeight = window.innerHeight * 0.6;
+      if (window.scrollY > heroHeight) {
+        header.classList.add('sm-header-scrolled');
+      } else {
+        header.classList.remove('sm-header-scrolled');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // run once on mount
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -344,7 +362,7 @@ export const StaggeredMenu = ({
         })()}
       </div>
 
-      <header className="staggered-menu-header" aria-label="Main navigation header">
+      <header ref={headerRef} className="staggered-menu-header" aria-label="Main navigation header">
         <div className="sm-logo" aria-label="Logo">
           {logoUrl && (
             <img
